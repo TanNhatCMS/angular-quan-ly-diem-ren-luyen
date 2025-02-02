@@ -3,6 +3,21 @@
 @use '@angular/material' as mat;
 // Plus imports for other components in your app.
 
+// _Variable
+@use "./styles/variable" as *;
+
+// Utilities CSS
+@use "./styles/utilities" as *;
+
+// UI Kit CSS
+@use "./styles/ui-kit" as *;
+
+// Dark CSS
+@use "./styles/dark" as *;
+
+/* Importing Bootstrap SCSS file. */
+@use 'bootstrap/scss/bootstrap' as *;
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
@@ -49,11 +64,8 @@ $trinta-theme: mat.m2-define-light-theme((
   --fontSize: 14px;
 }
 
-// _Variable
-@import "./variable";
 
-// Utilities CSS
-@import "./utilities";
+
 
 *, ::after, ::before {
   box-sizing: border-box;
@@ -152,12 +164,6 @@ input {
   font-size: 16px !important;
 }
 
-// UI Kit CSS
-@import "./ui-kit";
-
-// Dark CSS
-@import "./dark";
-
 /* Max width 767px */
 @media only screen and (max-width : 767px) {
 
@@ -202,5 +208,3 @@ input {
 /* Min width 1600px */
 @media only screen and (min-width: 1600px) {}
 
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
