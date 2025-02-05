@@ -10,7 +10,7 @@ import {IconsModule} from "../icons/icons.module";
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ MatButtonModule, MatMenuModule, RouterLink, NgClass, IconsModule],
+  imports: [ MatButtonModule, MatMenuModule, IconsModule, NgClass ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   providers: [
@@ -26,6 +26,7 @@ export class HeaderComponent {
     this.toggleService.isToggled$.subscribe(isToggled => {
       this.isToggled = isToggled;
     });
+    this.formattedDate = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
   }
 
   // Toggle Service
@@ -41,6 +42,6 @@ export class HeaderComponent {
 
   // Current Date
   currentDate: Date = new Date();
-  formattedDate: any = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
+  formattedDate: any;
 
 }

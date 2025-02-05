@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {MatAnchor, MatButtonModule} from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LogoutConfirmationDialogComponent } from './logout-confirmation-dialog.component';
-import { Location } from '@angular/common';
+import {isPlatformBrowser, Location } from '@angular/common';
 import {AuthService} from "../../services/auth.service";
 
 
 @Component({
   selector: 'app-logout',
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule],
+  imports: [MatDialogModule, MatAnchor],
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.scss']
 })
@@ -19,11 +19,14 @@ export class LogoutComponent implements OnInit {
     private authService: AuthService,
     private dialog: MatDialog,
     private router: Router,
-    private location: Location
-  ) {}
+    private location: Location,
+  @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.openLogoutConfirmation();
+  }
 
   ngOnInit(): void {
-    this.openLogoutConfirmation();
+
   }
 
   openLogoutConfirmation(): void {
@@ -38,7 +41,9 @@ export class LogoutComponent implements OnInit {
           this.router.navigate(['/']);
         }, 3000); // Redirect after 3 seconds
       } else {
-        this.location.back();
+        if (isPlatformBrowser(this.platformId)) {
+          this.location.back();
+        }
       }
     });
   }

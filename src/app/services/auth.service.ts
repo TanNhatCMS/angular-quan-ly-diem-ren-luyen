@@ -141,7 +141,7 @@ export class AuthService {
       }
     }).subscribe({
       next: (response: any) => {
-        this.changeUser([response.data.user]||[]);
+        this.changeUser(response.data.user ? [response.data.user] : []);
         this.isAuthenticated = true;
         console.log('User info:', response.data.user);
       },
